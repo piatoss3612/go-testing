@@ -34,7 +34,7 @@ $ go test -cover .
 ok      primeapp        0.447s  coverage: 72.7% of statements
 ```
 
-1. 커버리지 프로파일을 파일로 저장
+2. 커버리지 프로파일을 파일로 저장
 
 ```bash
 $ go test -coverprofile=coverage.out
@@ -43,7 +43,7 @@ coverage: 72.7% of statements
 ok      primeapp        0.438s
 ```
 
-1. 커버리지 프로파일을 html로 시각화
+3. 커버리지 프로파일을 html로 시각화
 
 ```bash
 $ go tool cover -html=coverage.out
