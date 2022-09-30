@@ -48,3 +48,37 @@ ok      primeapp        0.438s
 ```bash
 $ go tool cover -html=coverage.out
 ```
+
+### Section04 Running individual tests & Test Suites
+
+#### Running a single test
+
+```bash
+$ go test -run Test_isPrime
+PASS
+ok      primeapp        0.580s
+```
+
+```bash
+$ go test -v -run Test_isPrime
+=== RUN   Test_isPrime
+--- PASS: Test_isPrime (0.00s)
+PASS
+ok      primeapp        0.610s
+```
+
+#### Running groups of tests (test suites)
+
+테스트 함수를 테스트 그룹명으로 묶어줄 수 있으며 테스트 그룹명을 이용해 그룹 테스트를 실행할 수 있다
+
+ex) [Test_alpha_Xxx, Test_alpha_Yyy], [Test_beta_Xxx, Test_beta_Yyy]
+
+```bash
+$ go test -v -run Test_alpha
+=== RUN   Test_alpha_isPrime
+--- PASS: Test_alpha_isPrime (0.00s)
+=== RUN   Test_alpha_prompt
+--- PASS: Test_alpha_prompt (0.00s)
+PASS
+ok      primeapp        0.715s
+```

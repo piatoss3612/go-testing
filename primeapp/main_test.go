@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func Test_isPrime(t *testing.T) {
+func Test_alpha_isPrime(t *testing.T) {
 	primeTests := []struct {
 		name     string
 		testNum  int
@@ -39,7 +39,7 @@ func Test_isPrime(t *testing.T) {
 	}
 }
 
-func Test_prompt(t *testing.T) {
+func Test_alpha_prompt(t *testing.T) {
 	// save a copy of os.Stdout
 	oldOut := os.Stdout
 
@@ -113,7 +113,7 @@ func Test_checkNumbers(t *testing.T) {
 	}
 }
 
-func Test_readUserInpu(t *testing.T) {
+func Test_readUserInput(t *testing.T) {
 	doneChan := make(chan bool)
 
 	// create a reference to a bytes.Buffer
