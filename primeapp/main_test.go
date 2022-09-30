@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"io"
 	"os"
 	"strings"
@@ -110,4 +111,19 @@ func Test_checkNumbers(t *testing.T) {
 			t.Errorf("%s: expected %s, but got %s", e.name, e.expected, res)
 		}
 	}
+}
+
+func Test_readUserInpu(t *testing.T) {
+	doneChan := make(chan bool)
+
+	// create a reference to a bytes.Buffer
+	var stdin bytes.Buffer
+
+	stdin.Write([]byte("1\nq\n"))
+
+	go readUserInput(&stdin, doneChan)
+
+	<-doneChan
+
+	close(doneChan)
 }
