@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/gob"
 	"flag"
 	"log"
 	"net/http"
+	"webapp/pkg/data"
 	"webapp/pkg/db"
 
 	"github.com/alexedwards/scs/v2"
@@ -13,6 +15,10 @@ type application struct {
 	DSN     string
 	Session *scs.SessionManager
 	DB      db.PostgresConn
+}
+
+func init() {
+	gob.Register(data.User{})
 }
 
 func main() {
