@@ -6,6 +6,9 @@ import (
 	"log"
 	"os"
 	"testing"
+	"time"
+	"webapp/pkg/data"
+	"webapp/pkg/repository"
 
 	"github.com/ory/dockertest/v3"
 	"github.com/ory/dockertest/v3/docker"
@@ -28,6 +31,7 @@ var (
 	resource *dockertest.Resource
 	pool     *dockertest.Pool
 	testDB   *sql.DB
+	testRepo repository.DatabaseRepo
 )
 
 func TestMain(m *testing.M) {
@@ -82,6 +86,8 @@ func TestMain(m *testing.M) {
 		log.Fatalf("error creating tables: %s", err)
 	}
 
+	testRepo = &PostgresDBRepo{DB: testDB}
+
 	// run tests
 	code := m.Run()
 
@@ -111,5 +117,61 @@ func Test_pingDB(t *testing.T) {
 	err := testDB.Ping()
 	if err != nil {
 		t.Error("cannot ping database")
+	}
+}
+
+func TestPostgresDBRepoInsertUser(t *testing.T) {
+	testUser := data.User{
+		FirstName: "Admin",
+		LastName:  "User",
+		Email:     "admin@example.com",
+		Password:  "secret",
+		IsAdmin:   1,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	id, err := testRepo.InsertUser(testUser)
+	if err != nil {
+		t.Errorf("insert user returned an error: %s", err)
+	}
+
+	if id != 1 {
+		t.Errorf("insert user returned wrong id; expected 1 but got %d", id)
+	}
+}
+
+func TestPostgresDBRepoAllUsers(t *testing.T) {
+	users, err := testRepo.AllUsers()
+	if err != nil {
+		t.Errorf("all users reports an error: %s", err)
+	}
+
+	if len(users) != 1 {
+		t.Errorf("all users reports wrong size; expected 1 but got %d", len(users))
+	}
+
+	testUser := data.User{
+		FirstName: "Jack",
+		LastName:  "Smith",
+		Email:     "admin2@example.com",
+		Password:  "secret",
+		IsAdmin:   1,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	_, err = testRepo.InsertUser(testUser)
+	if err != nil {
+		t.Errorf("insert user returned an error: %s", err)
+	}
+
+	users, err = testRepo.AllUsers()
+	if err != nil {
+		t.Errorf("all users reports an error: %s", err)
+	}
+
+	if len(users) != 2 {
+		t.Errorf("all users reports wrong size; expected 2 but got %d", len(users))
 	}
 }
