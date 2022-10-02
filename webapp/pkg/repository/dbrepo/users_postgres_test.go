@@ -154,7 +154,7 @@ func TestPostgresDBRepoAllUsers(t *testing.T) {
 	testUser := data.User{
 		FirstName: "Jack",
 		LastName:  "Smith",
-		Email:     "admin2@example.com",
+		Email:     "jack@smith.com",
 		Password:  "secret",
 		IsAdmin:   1,
 		CreatedAt: time.Now(),
@@ -173,5 +173,60 @@ func TestPostgresDBRepoAllUsers(t *testing.T) {
 
 	if len(users) != 2 {
 		t.Errorf("all users reports wrong size; expected 2 but got %d", len(users))
+	}
+}
+
+func TestPostgresDBRepoGetUser(t *testing.T) {
+	user, err := testRepo.GetUser(1)
+	if err != nil {
+		t.Errorf("error getting user by id: %s", err)
+	}
+
+	if user.Email != "admin@example.com" {
+		t.Errorf("wrong email returned by GetUser; expected admin@example.com but got %s", user.Email)
+	}
+
+	_, err = testRepo.GetUser(3)
+	if err == nil {
+		t.Error("no error reported when getting non existent user by id")
+	}
+}
+
+func TestPostgresDBRepoGetUserByEmail(t *testing.T) {
+	user, err := testRepo.GetUserByEmail("jack@smith.com")
+	if err != nil {
+		t.Errorf("error getting user by email: %s", err)
+	}
+
+	if user.ID != 2 {
+		t.Errorf("wrong id returned by GetUserByEmail; expected 2 but got %d", user.ID)
+	}
+}
+
+func TestPostgresDBRepoUpdateUser(t *testing.T) {
+	user, _ := testRepo.GetUser(2)
+	user.FirstName = "Jane"
+	user.Email = "jane@smith.com"
+
+	err := testRepo.UpdateUser(*user)
+	if err != nil {
+		t.Errorf("error updating user %d: %s", 2, err)
+	}
+
+	user, _ = testRepo.GetUser(2)
+	if user.FirstName != "Jane" || user.Email != "jane@smith.com" {
+		t.Errorf("expected updated record to have first name Jane and email jane@smith.com but got %s %s", user.FirstName, user.Email)
+	}
+}
+
+func TestPostgresDBRepoDeleteUser(t *testing.T) {
+	err := testRepo.DeleteUser(2)
+	if err != nil {
+		t.Errorf("error deleting user id 2: %s", err)
+	}
+
+	_, err = testRepo.GetUser(2)
+	if err == nil {
+		t.Error("retrieved user id 2, who should have been deleted")
 	}
 }
