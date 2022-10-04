@@ -1,4 +1,9 @@
 mode: set
+webapp/cmd/api/routes.go:10.47,22.64 5 0
+webapp/cmd/api/routes.go:33.2,33.43 1 0
+webapp/cmd/api/routes.go:43.2,43.12 1 0
+webapp/cmd/api/routes.go:22.64,30.3 2 0
+webapp/cmd/api/routes.go:33.43,41.3 5 0
 webapp/cmd/api/utils.go:10.110,15.19 2 1
 webapp/cmd/api/utils.go:34.2,39.16 4 1
 webapp/cmd/api/utils.go:42.2,42.12 1 1
@@ -32,6 +37,14 @@ webapp/cmd/api/api-handlers.go:57.74,59.2 0 0
 webapp/cmd/api/api-handlers.go:61.77,63.2 0 0
 webapp/cmd/api/api-handlers.go:65.77,67.2 0 0
 webapp/cmd/api/api-handlers.go:69.77,71.2 0 0
+webapp/cmd/api/api-middleware.go:5.68,6.71 1 1
+webapp/cmd/api/api-middleware.go:6.71,8.28 2 1
+webapp/cmd/api/api-middleware.go:8.28,13.4 4 1
+webapp/cmd/api/api-middleware.go:13.9,15.4 1 1
+webapp/cmd/api/api-middleware.go:19.70,20.71 1 1
+webapp/cmd/api/api-middleware.go:20.71,22.17 2 1
+webapp/cmd/api/api-middleware.go:27.3,27.23 1 1
+webapp/cmd/api/api-middleware.go:22.17,25.4 2 1
 webapp/cmd/api/auth.go:29.118,37.22 3 1
 webapp/cmd/api/auth.go:42.2,43.27 2 1
 webapp/cmd/api/auth.go:48.2,48.32 1 1
@@ -69,19 +82,6 @@ webapp/cmd/api/main.go:21.13,29.16 7 0
 webapp/cmd/api/main.go:33.2,40.16 5 0
 webapp/cmd/api/main.go:29.16,31.3 1 0
 webapp/cmd/api/main.go:40.16,42.3 1 0
-webapp/cmd/api/routes.go:10.47,22.64 5 0
-webapp/cmd/api/routes.go:33.2,33.43 1 0
-webapp/cmd/api/routes.go:43.2,43.12 1 0
-webapp/cmd/api/routes.go:22.64,30.3 2 0
-webapp/cmd/api/routes.go:33.43,41.3 5 0
-webapp/cmd/web/db.go:12.42,14.16 2 0
-webapp/cmd/web/db.go:18.2,19.16 2 0
-webapp/cmd/web/db.go:23.2,23.16 1 0
-webapp/cmd/web/db.go:14.16,16.3 1 0
-webapp/cmd/web/db.go:19.16,21.3 1 0
-webapp/cmd/web/db.go:26.56,28.16 2 0
-webapp/cmd/web/db.go:32.2,34.18 2 0
-webapp/cmd/web/db.go:28.16,30.3 1 0
 webapp/cmd/web/forms.go:10.42,12.26 2 1
 webapp/cmd/web/forms.go:16.2,16.22 1 1
 webapp/cmd/web/forms.go:12.26,14.3 1 1
@@ -171,3 +171,11 @@ webapp/cmd/web/routes.go:10.47,22.40 7 1
 webapp/cmd/web/routes.go:29.2,32.12 3 1
 webapp/cmd/web/routes.go:22.40,26.3 3 1
 webapp/cmd/web/sessions.go:10.39,18.2 6 1
+webapp/cmd/web/db.go:12.42,14.16 2 0
+webapp/cmd/web/db.go:18.2,19.16 2 0
+webapp/cmd/web/db.go:23.2,23.16 1 0
+webapp/cmd/web/db.go:14.16,16.3 1 0
+webapp/cmd/web/db.go:19.16,21.3 1 0
+webapp/cmd/web/db.go:26.56,28.16 2 0
+webapp/cmd/web/db.go:32.2,34.18 2 0
+webapp/cmd/web/db.go:28.16,30.3 1 0
