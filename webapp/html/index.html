@@ -110,8 +110,8 @@
         if (!refreshRunning) {
           setTimeout(() => {
             if (access_token !== "") {
-              //   setInterval(refreshTokens, 10 * 60 * 1000); // every 10 min
-              setInterval(refreshTokens, 5 * 1000); // every 5 sec
+              setInterval(refreshTokens, 10 * 60 * 1000); // every 10 min
+              //   setInterval(refreshTokens, 5 * 1000); // every 5 sec
             }
           }, secondsRemaining);
         }
@@ -145,6 +145,41 @@
           })
           .catch((error) => {
             alert(error);
+          });
+      });
+
+      logoutBtn.addEventListener("click", () => {
+        access_token = "";
+        refresh_token = "";
+
+        fetch("/web/logout", { method: "GET" })
+          .then((response) => {
+            setUI(false);
+          })
+          .catch((error) => {
+            userOutput.innerHTML = error;
+          });
+      });
+
+      userBtn.addEventListener("click", () => {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + access_token);
+
+        const requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+        };
+
+        fetch("/users/1", requestOptions)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data) {
+              userOutput.innerHTML = JSON.stringify(data, undefined, 4);
+            }
+          })
+          .catch((error) => {
+            userOutput.innerHTML = "Log in first!";
           });
       });
 
